@@ -3,6 +3,7 @@ import table from "@editorjs/table";
 import header from "@editorjs/header";
 import list from "@editorjs/list";
 import code from "@editorjs/code";
+import "./editor.pcss";
 
 export function Editor() {
   const editor = new EditorJS({
@@ -17,5 +18,5 @@ export function Editor() {
       table,
     },
   });
-  return <div id="editorjs"></div>;
+  return <div className=" text-xl" id="editorjs"></div>;
 }
