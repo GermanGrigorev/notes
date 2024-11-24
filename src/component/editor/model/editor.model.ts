@@ -1,14 +1,8 @@
+import { OutputBlockData, OutputData } from "@editorjs/editorjs";
+
 export type TEditorBlockId = string;
 export type TEditorBlockType = string;
 
-export interface IEditorBlock {
-  id: TEditorBlockId;
-  type: TEditorBlockType;
-  data: ObjectUnknown;
-}
+export type IEditorBlock = OutputBlockData;
 
-export interface IEditorData {
-  time: number;
-  blocks: IEditorBlock[];
-  version: string;
-}
+export type IEditorData = OutputData;

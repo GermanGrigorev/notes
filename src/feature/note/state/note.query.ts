@@ -8,8 +8,8 @@ export function useNoteQuery({ id }: { id: TNoteId }) {
   const query = useQuery({
     queryKey: getNoteQueryKey(id),
     queryFn: async () => {
-      const projects = await noteApi.get(id);
-      return projects;
+      const note = await noteApi.get(id);
+      return note;
     },
   });
 

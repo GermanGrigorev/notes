@@ -1,6 +1,4 @@
-import * as React from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Editor } from "../component/editor";
 import { Notepad } from "../good/notepad";
 import { routes } from "../routes-help/routes";
 

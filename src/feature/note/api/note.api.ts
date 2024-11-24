@@ -5,14 +5,27 @@ import { IProject, TProjectId } from "../../../entity/project";
 const BASE_URL = "/api/v1/notes";
 
 export class NoteApi {
-  private httpClient!: HttpClient;
+  private httpClient: HttpClient;
+
+  constructor() {
+    const proxy = new Proxy(
+      {},
+      {
+        get() {
+          throw new Error("missing httpClient");
+        },
+      }
+    );
+    this.httpClient = proxy as HttpClient;
+  }
 
   setHttpClient(httpClient: HttpClient) {
     this.httpClient = httpClient;
   }
 
-  async get(id: TNoteId): Promise<INote[]> {
-    return this.httpClient.get<INote[]>(BASE_URL + `/${id}`);
+  async get(id: TNoteId): Promise<INote> {
+    const res = await this.httpClient.get<INote>(BASE_URL + `/${id}`);
+    return res;
   }
 
   async create(data: INote) {
