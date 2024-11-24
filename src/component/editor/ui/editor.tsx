@@ -18,5 +18,5 @@ export function Editor() {
       table,
     },
   });
-  return <div className=" text-xl" id="editorjs"></div>;
+  return <div className="text-xl" id="editorjs"></div>;
 }
