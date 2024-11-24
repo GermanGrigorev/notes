@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Editor } from "../component/editor";
+import { ProjectCatalog } from "../good/project-catalog";
 
 export const Route = createFileRoute("/")({
   component: HomeComponent,
@@ -8,7 +9,7 @@ export const Route = createFileRoute("/")({
 function HomeComponent() {
   return (
     <div className="p-2">
-      <Editor />
+      <ProjectCatalog />
     </div>
   );
 }
