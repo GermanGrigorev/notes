@@ -18,7 +18,11 @@
     "vite": "^5.4.8"
   },
   "dependencies": {
+    "@editorjs/code": "^2.9.3",
     "@editorjs/editorjs": "^2.30.7",
+    "@editorjs/header": "^2.8.8",
+    "@editorjs/list": "^2.0.2",
+    "@editorjs/table": "^2.4.2",
     "@tanstack/react-router": "^1.82.2",
     "@tanstack/router-devtools": "^1.82.2",
     "react": "^18.3.1",
