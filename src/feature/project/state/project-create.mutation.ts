@@ -8,7 +8,7 @@ export function useProjectCreateMutation() {
 
   const mutation = useMutation({
     mutationFn: async (project: IProject) => {
-      const res = await projectApi.createProject(project);
+      const res = await projectApi.create(project);
       return res;
     },
     onSuccess: () => {

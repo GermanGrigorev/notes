@@ -1,26 +1,27 @@
 import { HttpClient } from "../../../common/http";
+import { INote, TNoteId } from "../../../entity/note";
 import { IProject, TProjectId } from "../../../entity/project";
 
-const BASE_URL = "/api/v1/projects";
+const BASE_URL = "/api/v1/notes";
 
-export class ProjectApi {
+export class NoteApi {
   private httpClient!: HttpClient;
 
   setHttpClient(httpClient: HttpClient) {
     this.httpClient = httpClient;
   }
 
-  async getAll(): Promise<IProject[]> {
-    return this.httpClient.get<IProject[]>(BASE_URL);
+  async get(id: TNoteId): Promise<INote[]> {
+    return this.httpClient.get<INote[]>(BASE_URL + `/${id}`);
   }
 
-  async create(data: IProject) {
+  async create(data: INote) {
     return this.httpClient.post(BASE_URL, data);
   }
 
-  async delete(id: TProjectId) {
+  async delete(id: TNoteId) {
     return this.httpClient.delete(BASE_URL + `/${id}`);
   }
 }
 
-export const projectApi = new ProjectApi();
+export const noteApi = new NoteApi();

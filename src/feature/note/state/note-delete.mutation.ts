@@ -1,19 +1,19 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { projectApi } from "../api/project.api";
+import { noteApi } from "../api/note.api";
 import { TProjectId } from "../../../entity/project";
-import { PROJECT_QUERY_KEY } from "./project.query";
+import { getNoteQueryKey } from "./note.query";
 
-export function useProjectDeleteMutation() {
+export function useNoteDeleteMutation() {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: async (id: TProjectId) => {
-      const res = await projectApi.delete(id);
+      const res = await noteApi.delete(id);
       return res;
     },
-    onSuccess: () => {
+    onSuccess: (_, id) => {
       // Invalidate and refetch
-      queryClient.invalidateQueries({ queryKey: PROJECT_QUERY_KEY });
+      queryClient.invalidateQueries({ queryKey: getNoteQueryKey(id) });
     },
   });
 

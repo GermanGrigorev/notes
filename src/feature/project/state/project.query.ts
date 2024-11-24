@@ -7,7 +7,7 @@ export function useProjectAllQuery() {
   const query = useQuery({
     queryKey: PROJECT_QUERY_KEY,
     queryFn: async () => {
-      const projects = await projectApi.getProjectAll();
+      const projects = await projectApi.getAll();
       return projects;
     },
   });
