@@ -1,6 +1,6 @@
-import * as React from "react";
 import { Link, Outlet, createRootRoute } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
+import { routes } from "../routes-help/routes";
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -11,7 +11,7 @@ function RootComponent() {
     <>
       <div className="p-2 flex gap-2 text-lg light">
         <Link
-          to="/"
+          to={routes.catalog()}
           activeProps={{
             className: "font-bold",
           }}

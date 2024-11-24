@@ -1,6 +1,11 @@
+import { TNoteId } from "../../../../entity/note";
 import { IProject } from "../../../../entity/project";
 
-export function ProjectCatalog() {
+export function ProjectCatalog({
+  getNoteUrl,
+}: {
+  getNoteUrl: (id: TNoteId) => string;
+}) {
   const projects: IProject[] = [
     {
       id: "1",
@@ -35,7 +40,7 @@ export function ProjectCatalog() {
           <div className="pl-10">
             {project.notes.map((note) => (
               <div key={note.id}>
-                <a href={`/notes/${note.id}`}>id: {note.id}</a>
+                <a href={getNoteUrl(note.id)}>id: {note.id}</a>
               </div>
             ))}
           </div>
