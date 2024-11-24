@@ -3,7 +3,7 @@ import { Editor, type EditorJS } from "../../../../component/editor";
 import { useNoteQuery, useNoteUpdateMutation } from "../../../../feature/note";
 
 export function Notepad({ getCatalogUrl }: { getCatalogUrl: () => string }) {
-  const { data: note } = useNoteQuery({ id: "1" });
+  const { data: note, isLoading } = useNoteQuery({ id: "1" });
   const { mutateAsync } = useNoteUpdateMutation();
 
   const [editor, setEditor] = useState<EditorJS | null>(null);
@@ -23,11 +23,9 @@ export function Notepad({ getCatalogUrl }: { getCatalogUrl: () => string }) {
       <div>
         <button onClick={handleSave}>Save</button>
       </div>
-      {note?.data && (
-        <div>
-          <Editor data={note?.data} onCreateEditor={setEditor} />
-        </div>
-      )}
+      <div>
+        <Editor data={note?.data} onCreateEditor={setEditor} />
+      </div>
     </div>
   );
 }

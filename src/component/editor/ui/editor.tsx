@@ -11,14 +11,13 @@ export function Editor({
   onCreateEditor,
   data,
 }: {
-  data: IEditorData;
+  data?: IEditorData;
   onCreateEditor: (editor: EditorJS) => void;
 }) {
   useEffect(() => {
     const editor = new EditorJS({
-      /**
-       * Id of Element that should contain Editor instance
-       */
+      data,
+      // Id of Element that should contain Editor instance
       holder: "editorjs",
       tools: {
         code,
