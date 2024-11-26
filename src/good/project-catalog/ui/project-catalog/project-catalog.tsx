@@ -43,20 +43,14 @@ export function ProjectCatalog({ noteRoute }: { noteRoute: string }) {
     await deleteProjectAsync(id);
   };
 
-  const dataReversed = useMemo(() => {
-    if (!data) return [];
-    return data.reverse().map((project) => ({
-      ...project,
-      pages: project.pages?.reverse(),
-    }));
-  }, [data]);
+  if (!data) return null;
 
   return (
     <div>
       <ProjectCreateForm />
-      {!dataReversed.length ? null : (
-        <Accordion defaultExpandedKeys={[dataReversed[0]?.id]}>
-          {dataReversed.map((project) => (
+      {!data.length ? null : (
+        <Accordion defaultExpandedKeys={[data[0]?.id]}>
+          {data.map((project) => (
             <AccordionItem className="" key={project?.id} title={project.title}>
               <div className="flex flex-col gap-5">
                 <div className="flex flex-col gap-3">

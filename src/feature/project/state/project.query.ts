@@ -8,8 +8,12 @@ export function useProjectAllQuery() {
   const query = useQuery({
     queryKey: PROJECT_QUERY_KEY,
     queryFn: async () => {
-      const projects = await projectApi.getAll(DEFAULT_USER_ID);
-      return projects;
+      const data = await projectApi.getAll(DEFAULT_USER_ID);
+      if (!data) return [];
+      return data.reverse().map((project) => ({
+        ...project,
+        pages: project.pages?.reverse(),
+      }));
     },
   });
 
