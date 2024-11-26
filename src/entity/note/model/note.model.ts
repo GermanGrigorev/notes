@@ -9,5 +9,5 @@ export interface INote {
   owner_id: TUserId;
   project_id: TProjectId;
   title: string;
-  data: IEditorData;
+  data: IEditorData | null;
 }
