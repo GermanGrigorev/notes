@@ -9,7 +9,7 @@ export const Route = createFileRoute("/")({
 function HomeComponent() {
   return (
     <div className="p-2">
-      <ProjectCatalog getNoteUrl={routes.note} />
+      <ProjectCatalog noteRoute={routes.noteRoute} />
     </div>
   );
 }
