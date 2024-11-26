@@ -36,15 +36,17 @@ export function Notepad({ noteId }: { noteId: TNoteId }) {
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
-      <div className="flex items-center justify-center gap-3">
-        <label>
+      <div className="flex gap-10 items-center justify-between px-10">
+        <label className="w-full">
           <input
-            className="focus-visible:outline-none p-2 text-xl "
+            className="bg-background focus-visible:outline-none p-2 text-3xl w-full"
             placeholder="Title"
             {...register("title")}
           />
         </label>
-        <Button type="submit">Save</Button>
+        <Button color="primary" type="submit">
+          Save
+        </Button>
       </div>
       <div>
         <Editor data={note?.data ?? undefined} onCreateEditor={setEditor} />

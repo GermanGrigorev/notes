@@ -8,7 +8,9 @@ export function AddNoteForm({ onSubmit }: { onSubmit: () => void }) {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <Button type="submit">Add Note</Button>
+      <Button color="primary" type="submit">
+        Add Note
+      </Button>
     </form>
   );
 }
