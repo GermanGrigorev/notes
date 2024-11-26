@@ -27,9 +27,9 @@ export class ProjectApi extends ApiBase {
     });
   }
 
-  async create(owner_id: TUserId, data: OmitId<IProject>) {
-    return this.httpClient.post(BASE_URL + "/add_proj", {
-      params: { owner_id, title: data.title },
+  async create(owner_id: TUserId, title: string) {
+    return this.httpClient.post(BASE_URL + "/add_proj", null, {
+      params: { owner_id, title },
     });
   }
 

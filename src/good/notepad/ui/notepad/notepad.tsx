@@ -48,9 +48,11 @@ export function Notepad({ noteId }: { noteId: TNoteId }) {
           Save
         </Button>
       </div>
-      <div>
-        <Editor data={note?.data ?? undefined} onCreateEditor={setEditor} />
-      </div>
+      {note && (
+        <div>
+          <Editor data={note.data ?? undefined} onCreateEditor={setEditor} />
+        </div>
+      )}
     </form>
   );
 }

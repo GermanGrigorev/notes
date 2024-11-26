@@ -11,6 +11,7 @@ function RootComponent() {
     <>
       <div className="p-2 flex gap-2 text-lg light">
         <Link
+          className="font-unbounded"
           to={routes.catalog()}
           activeProps={{
             className: "font-bold",
