@@ -24,7 +24,6 @@ export function ProjectCatalog({ noteRoute }: { noteRoute: string }) {
   if (!data) return null;
   return (
     <div>
-      <ThemeSwitcher />
       <Accordion>
         {data.map((project) => (
           <AccordionItem className="" key={project.id} title={project.title}>

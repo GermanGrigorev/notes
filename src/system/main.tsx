@@ -34,7 +34,7 @@ function App() {
     <NextUIProvider>
       <QueryClientProvider client={queryClient}>
         <main
-          className={`${darkMode.value ? "dark" : ""} text-foreground bg-background min-h-screen`}
+          className={`${darkMode.value ? "dark" : "mine"} text-foreground bg-background min-h-screen`}
         >
           <RouterProvider router={router} />
         </main>
