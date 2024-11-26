@@ -7,5 +7,5 @@ export interface IProject {
   id: TProjectId;
   owner_id: TUserId;
   title: string;
-  pages: INote[];
+  pages: INote[] | null;
 }

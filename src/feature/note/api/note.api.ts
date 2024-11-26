@@ -24,14 +24,19 @@ export class NoteApi extends ApiBase {
     return res.page;
   }
 
-  async create(note: OmitId<INote>) {
-    return this.httpClient.post(BASE_URL + "/add_page", note.data, {
-      params: {
-        owner_id: note.owner_id,
-        project_id: note.project_id,
-        title: note.title,
-      },
-    });
+  async create(note: OmitId<INote>): Promise<TNoteId> {
+    const res = await this.httpClient.post<{ pageId: TNoteId }>(
+      BASE_URL + "/add_page",
+      note.data,
+      {
+        params: {
+          owner_id: note.owner_id,
+          project_id: note.project_id,
+          title: note.title,
+        },
+      }
+    );
+    return res.pageId;
   }
 
   async update(note: INote) {

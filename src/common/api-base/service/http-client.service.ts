@@ -22,49 +22,49 @@ export class HttpClient {
       },
     });
 
-    this.initializeRequestInterceptor();
+    // this.initializeRequestInterceptor();
   }
 
-  private initializeRequestInterceptor() {
-    this.instance.interceptors.request.use(
-      (config: InternalAxiosRequestConfig) => {
-        if (this.token) {
-          config.headers["Authorization"] = `Bearer ${this.token}`;
-        }
-        return config;
-      },
-      (error) => Promise.reject(error)
-    );
-  }
+  // private initializeRequestInterceptor() {
+  //   this.instance.interceptors.request.use(
+  //     (config: InternalAxiosRequestConfig) => {
+  //       if (this.token) {
+  //         config.headers["Authorization"] = `Bearer ${this.token}`;
+  //       }
+  //       return config;
+  //     },
+  //     (error) => Promise.reject(error)
+  //   );
+  // }
 
-  public initializeResponseInterceptor(
-    onRefreshToken: () => Promise<{ token: string } | null>
-  ) {
-    this.instance.interceptors.response.use(
-      (response) => response,
-      async (error) => {
-        console.log(error.config);
-        const config = error?.config;
+  // public initializeResponseInterceptor(
+  //   onRefreshToken: () => Promise<{ token: string } | null>
+  // ) {
+  //   this.instance.interceptors.response.use(
+  //     (response) => response,
+  //     async (error) => {
+  //       console.log(error.config);
+  //       const config = error?.config;
 
-        if (
-          error?.response?.status === 401 &&
-          !config?.sent &&
-          config.url !== REFRESH_URL
-        ) {
-          config.sent = true;
+  //       if (
+  //         error?.response?.status === 401 &&
+  //         !config?.sent &&
+  //         config.url !== REFRESH_URL
+  //       ) {
+  //         config.sent = true;
 
-          const result = await onRefreshToken();
+  //         const result = await onRefreshToken();
 
-          if (result?.token) {
-            config.headers["Authorization"] = `Bearer ${result.token}`;
-          }
+  //         if (result?.token) {
+  //           config.headers["Authorization"] = `Bearer ${result.token}`;
+  //         }
 
-          return axios(config);
-        }
-        return Promise.reject(error);
-      }
-    );
-  }
+  //         return axios(config);
+  //       }
+  //       return Promise.reject(error);
+  //     }
+  //   );
+  // }
 
   public setToken(token: string) {
     this.token = token;

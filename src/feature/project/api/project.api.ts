@@ -6,9 +6,19 @@ const BASE_URL = "";
 
 export class ProjectApi extends ApiBase {
   async getAll(user_id: TUserId): Promise<IProject[]> {
-    return this.httpClient.get<IProject[]>(BASE_URL + "/get_all_proj", {
-      params: { user_id },
-    });
+    try {
+      const res = await this.httpClient.get<{ projects: IProject[] }>(
+        BASE_URL + "/get_all_proj",
+        {
+          params: { user_id },
+        }
+      );
+      console.log(res);
+      return res.projects;
+    } catch (e: any) {
+      console.error("e++++++++rr", e.message);
+    }
+    return [];
   }
 
   async get(proj_id: TProjectId): Promise<IProject> {
