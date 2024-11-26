@@ -1,4 +1,5 @@
 import { FormEvent } from "react";
+import { Button } from "@nextui-org/button";
 
 export function AddNoteForm({ onSubmit }: { onSubmit: () => void }) {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -7,7 +8,7 @@ export function AddNoteForm({ onSubmit }: { onSubmit: () => void }) {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <button type="submit">Add Note</button>
+      <Button type="submit">Add Note</Button>
     </form>
   );
 }

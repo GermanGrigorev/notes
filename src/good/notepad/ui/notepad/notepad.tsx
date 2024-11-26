@@ -3,6 +3,7 @@ import { Editor, type EditorJS } from "../../../../component/editor";
 import { useNoteQuery, useNoteUpdateMutation } from "../../../../feature/note";
 import { TNoteId } from "../../../../entity/note";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { Button } from "@nextui-org/button";
 
 type Inputs = {
   title: string;
@@ -37,7 +38,7 @@ export function Notepad({ noteId }: { noteId: TNoteId }) {
         <label>
           <input placeholder="Title" {...register("title")} />
         </label>
-        <button type="submit">Save</button>
+        <Button type="submit">Save</Button>
       </div>
       <div>
         <Editor data={note?.data ?? undefined} onCreateEditor={setEditor} />
