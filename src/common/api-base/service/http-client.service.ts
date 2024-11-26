@@ -1,8 +1,9 @@
 import axios from "axios";
 import type {
   AxiosInstance,
-  InternalAxiosRequestConfig,
+  AxiosRequestConfig,
   AxiosResponse,
+  InternalAxiosRequestConfig,
 } from "axios";
 
 export const REFRESH_URL = "/api/v1/auth/refresh";
@@ -82,10 +83,7 @@ export class HttpClient {
     throw error.response?.data || error.message || "Unknown API error";
   }
 
-  public async get<T>(
-    url: string,
-    config?: InternalAxiosRequestConfig
-  ): Promise<T> {
+  public async get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
     try {
       const response = await this.instance.get<T>(url, config);
       return this.handleResponse(response);
@@ -97,7 +95,7 @@ export class HttpClient {
   public async post<T>(
     url: string,
     data?: any,
-    config?: InternalAxiosRequestConfig
+    config?: AxiosRequestConfig
   ): Promise<T> {
     try {
       const response = await this.instance.post<T>(url, data, config);
@@ -110,7 +108,7 @@ export class HttpClient {
   public async put<T>(
     url: string,
     data?: any,
-    config?: InternalAxiosRequestConfig
+    config?: AxiosRequestConfig
   ): Promise<T | never> {
     try {
       const response = await this.instance.put<T>(url, data, config);
@@ -123,7 +121,7 @@ export class HttpClient {
   public async patch<T>(
     url: string,
     data?: any,
-    config?: InternalAxiosRequestConfig
+    config?: AxiosRequestConfig
   ): Promise<T | never> {
     try {
       const response = await this.instance.patch<T>(url, data, config);
@@ -133,10 +131,7 @@ export class HttpClient {
     }
   }
 
-  public async delete<T>(
-    url: string,
-    config?: InternalAxiosRequestConfig
-  ): Promise<T> {
+  public async delete<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
     try {
       const response = await this.instance.delete<T>(url, config);
       return this.handleResponse(response);

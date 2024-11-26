@@ -1,25 +1,32 @@
-import { HttpClient } from "../../../common/http";
+import { ApiBase, OmitId } from "../../../common/api-base";
 import { IProject, TProjectId } from "../../../entity/project";
+import { TUserId } from "../../../entity/user";
 
-const BASE_URL = "/api/v1/projects";
+const BASE_URL = "";
 
-export class ProjectApi {
-  private httpClient!: HttpClient;
-
-  setHttpClient(httpClient: HttpClient) {
-    this.httpClient = httpClient;
+export class ProjectApi extends ApiBase {
+  async getAll(user_id: TUserId): Promise<IProject[]> {
+    return this.httpClient.get<IProject[]>(BASE_URL + "/get_all_proj", {
+      params: { user_id },
+    });
   }
 
-  async getAll(): Promise<IProject[]> {
-    return this.httpClient.get<IProject[]>(BASE_URL);
+  async get(proj_id: TProjectId): Promise<IProject> {
+    return this.httpClient.get<IProject>(BASE_URL + "/get_proj", {
+      params: { proj_id },
+    });
   }
 
-  async create(data: IProject) {
-    return this.httpClient.post(BASE_URL, data);
+  async create(owner_id: TUserId, data: OmitId<IProject>) {
+    return this.httpClient.post(BASE_URL + "/add_proj", {
+      params: { owner_id, title: data.title },
+    });
   }
 
-  async delete(id: TProjectId) {
-    return this.httpClient.delete(BASE_URL + `/${id}`);
+  async delete(proj_id: TProjectId): Promise<IProject> {
+    return this.httpClient.delete<IProject>(BASE_URL + "/delete_proj", {
+      params: { proj_id },
+    });
   }
 }
 

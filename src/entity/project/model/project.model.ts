@@ -1,9 +1,11 @@
 import { INote } from "../../note";
+import { TUserId } from "../../user";
 
 export type TProjectId = string;
 
 export interface IProject {
   id: TProjectId;
-  name: string;
-  notes: INote[];
+  owner_id: TUserId;
+  title: string;
+  pages: INote[];
 }

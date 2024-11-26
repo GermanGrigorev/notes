@@ -1,9 +1,9 @@
-import { HttpClient } from "../common/http";
+import { HttpClient } from "../common/api-base";
 import { noteApi } from "../feature/note/api/note.api";
 import { projectApi } from "../feature/project/api/project.api";
 
 export function initApis() {
-  const httpClient = new HttpClient("http://localhost:8000");
+  const httpClient = new HttpClient("http://localhost:5003");
 
   projectApi.setHttpClient(httpClient);
   noteApi.setHttpClient(httpClient);

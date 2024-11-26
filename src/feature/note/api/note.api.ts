@@ -1,39 +1,56 @@
-import { HttpClient } from "../../../common/http";
+import { ApiBase, OmitId } from "../../../common/api-base";
 import { INote, TNoteId } from "../../../entity/note";
-import { IProject, TProjectId } from "../../../entity/project";
+import { TProjectId } from "../../../entity/project";
 
-const BASE_URL = "/api/v1/notes";
+const BASE_URL = "";
 
-export class NoteApi {
-  private httpClient: HttpClient;
+type Page<T> = { page: T };
 
-  constructor() {
-    const proxy = new Proxy(
-      {},
+export class NoteApi extends ApiBase {
+  async getAll(project_id: TProjectId): Promise<INote[]> {
+    const res = await this.httpClient.get<Page<INote[]>>(
+      BASE_URL + "/get_all_proj",
       {
-        get() {
-          throw new Error("missing httpClient");
-        },
+        params: { project_id },
       }
     );
-    this.httpClient = proxy as HttpClient;
-  }
-
-  setHttpClient(httpClient: HttpClient) {
-    this.httpClient = httpClient;
+    return res.page;
   }
 
   async get(id: TNoteId): Promise<INote> {
-    const res = await this.httpClient.get<INote>(BASE_URL + `/${id}`);
-    return res;
+    const res = await this.httpClient.get<Page<INote>>(BASE_URL + "/get_page", {
+      params: { page_id: id },
+    });
+    return res.page;
   }
 
-  async create(data: INote) {
-    return this.httpClient.post(BASE_URL, data);
+  async create(note: OmitId<INote>) {
+    return this.httpClient.post(BASE_URL + "/add_page", note.data, {
+      params: {
+        owner_id: note.owner_id,
+        project_id: note.project_id,
+        title: note.title,
+      },
+    });
+  }
+
+  async update(note: INote) {
+    return this.httpClient.post(BASE_URL + "/edit_page", note.data, {
+      params: {
+        id: note.id,
+        owner_id: note.owner_id,
+        project_id: note.project_id,
+        title: note.title,
+      },
+    });
   }
 
   async delete(id: TNoteId) {
-    return this.httpClient.delete(BASE_URL + `/${id}`);
+    return this.httpClient.delete(BASE_URL + "/delete_page", {
+      params: {
+        page_id: id,
+      },
+    });
   }
 }
 
