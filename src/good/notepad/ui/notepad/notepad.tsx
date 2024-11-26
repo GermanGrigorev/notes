@@ -1,31 +1,47 @@
 import { useState } from "react";
 import { Editor, type EditorJS } from "../../../../component/editor";
 import { useNoteQuery, useNoteUpdateMutation } from "../../../../feature/note";
+import { TNoteId } from "../../../../entity/note";
+import { SubmitHandler, useForm } from "react-hook-form";
 
-export function Notepad({ getCatalogUrl }: { getCatalogUrl: () => string }) {
-  const { data: note, isLoading } = useNoteQuery({ id: "1" });
+type Inputs = {
+  title: string;
+};
+
+export function Notepad({ noteId }: { noteId: TNoteId }) {
+  const { data: note, isLoading } = useNoteQuery({ id: noteId });
   const { mutateAsync } = useNoteUpdateMutation();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Inputs>({ values: { title: note?.title ?? "" } });
 
   const [editor, setEditor] = useState<EditorJS | null>(null);
 
-  const handleSave = async () => {
+  const handleFormSubmit: SubmitHandler<Inputs> = async (formData) => {
     if (!editor || !note) return;
 
-    const data = await editor.save();
+    const editorData = await editor.save();
     await mutateAsync({
       ...note,
-      data,
+      data: editorData,
+      title: formData.title,
     });
   };
 
   return (
-    <div>
-      <div>
-        <button onClick={handleSave}>Save</button>
+    <form onSubmit={handleSubmit(handleFormSubmit)}>
+      <div className="">
+        <label>
+          <input placeholder="Title" {...register("title")} />
+        </label>
+        <button type="submit">Save</button>
       </div>
       <div>
-        <Editor data={note?.data} onCreateEditor={setEditor} />
+        <Editor data={note?.data ?? undefined} onCreateEditor={setEditor} />
       </div>
-    </div>
+    </form>
   );
 }

@@ -8,7 +8,7 @@ export function useNoteUpdateMutation() {
 
   const mutation = useMutation({
     mutationFn: async (note: INote) => {
-      const res = await noteApi.create(note);
+      const res = await noteApi.update(note);
       return res;
     },
     onSuccess: (_, note) => {
