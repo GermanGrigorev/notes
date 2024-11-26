@@ -21,6 +21,8 @@ export function Notepad({ noteId }: { noteId: TNoteId }) {
 
   const [editor, setEditor] = useState<EditorJS | null>(null);
 
+  // const { ...titleRegister } = useMemo(() => register("title"), []);
+
   const handleFormSubmit: SubmitHandler<Inputs> = async (formData) => {
     if (!editor || !note) return;
 
@@ -34,9 +36,13 @@ export function Notepad({ noteId }: { noteId: TNoteId }) {
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
-      <div className="">
+      <div className="flex items-center justify-center gap-3">
         <label>
-          <input placeholder="Title" {...register("title")} />
+          <input
+            className="focus-visible:outline-none p-2 text-xl "
+            placeholder="Title"
+            {...register("title")}
+          />
         </label>
         <Button type="submit">Save</Button>
       </div>

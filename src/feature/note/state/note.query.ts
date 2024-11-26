@@ -9,7 +9,6 @@ export function useNoteQuery({ id }: { id: TNoteId }) {
     queryKey: getNoteQueryKey(id),
     queryFn: async () => {
       const note = await noteApi.get(id);
-      console.log("--note", note);
       return note;
     },
   });
