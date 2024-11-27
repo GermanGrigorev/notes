@@ -13,7 +13,6 @@ export class ProjectApi extends ApiBase {
           params: { user_id },
         }
       );
-      console.log(res);
       return res.projects;
     } catch (e: any) {
       console.error("e++++++++rr", e.message);
