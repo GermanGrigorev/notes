@@ -4,7 +4,6 @@ import { routeTree } from "../routeTree.gen";
 import { initApis } from "./initApis";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { NextUIProvider } from "@nextui-org/react";
-import useDarkMode from "use-dark-mode";
 
 // Set up a Router instance
 const router = createRouter({
@@ -29,12 +28,11 @@ window.global ||= window;
 const queryClient = new QueryClient();
 
 function App() {
-  const darkMode = useDarkMode(false);
   return (
     <NextUIProvider>
       <QueryClientProvider client={queryClient}>
         <main
-          className={`${darkMode.value ? "dark" : "mine"} text-foreground bg-background min-h-screen font-unbounded font-extralight`}
+          className={` mine text-foreground bg-background min-h-screen font-unbounded font-extralight`}
         >
           <RouterProvider router={router} />
         </main>
