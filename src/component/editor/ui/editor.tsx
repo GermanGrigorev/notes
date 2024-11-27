@@ -7,6 +7,7 @@ import image from "@editorjs/image";
 import "./editor.pcss";
 import { useEffect } from "react";
 import { IEditorData } from "../model/editor.model";
+import { editorImageApi } from "../api/editor-image.api";
 
 export function Editor({
   onCreateEditor,
@@ -29,9 +30,10 @@ export function Editor({
         image: {
           class: image,
           config: {
-            endpoints: {
-              byFile: "http://localhost:8008/uploadFile", // Your backend file uploader endpoint
-              byUrl: "http://localhost:8008/fetchUrl", // Your endpoint that provides uploading by Url
+            uploader: {
+              async uploadByFile(file: File) {
+                return await editorImageApi.create(file);
+              },
             },
           },
         },
