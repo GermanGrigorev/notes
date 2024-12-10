@@ -12,9 +12,9 @@ export class ProjectApi extends ApiBase {
     return res.projects;
   }
 
-  async get(proj_id: TProjectId): Promise<IProject> {
+  async get(project_id: TProjectId): Promise<IProject> {
     return this.httpClient.get<IProject>(BASE_URL + "/get_proj", {
-      params: { proj_id },
+      params: { project_id },
     });
   }
 
@@ -24,9 +24,9 @@ export class ProjectApi extends ApiBase {
     });
   }
 
-  async delete(proj_id: TProjectId): Promise<IProject> {
+  async delete(project_id: TProjectId): Promise<IProject> {
     return this.httpClient.delete<IProject>(BASE_URL + "/delete_proj", {
-      params: { proj_id },
+      params: { project_id },
     });
   }
 }
