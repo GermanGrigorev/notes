@@ -1,9 +1,9 @@
 import axios from "axios";
 import type {
   AxiosInstance,
-  AxiosRequestConfig,
-  AxiosResponse,
   InternalAxiosRequestConfig,
+  AxiosResponse,
+  AxiosRequestConfig,
 } from "axios";
 
 export const REFRESH_URL = "/api/v1/auth/refresh";
@@ -22,20 +22,22 @@ export class HttpClient {
       },
     });
 
-    // this.initializeRequestInterceptor();
+    this.initializeRequestInterceptor();
   }
 
-  // private initializeRequestInterceptor() {
-  //   this.instance.interceptors.request.use(
-  //     (config: InternalAxiosRequestConfig) => {
-  //       if (this.token) {
-  //         config.headers["Authorization"] = `Bearer ${this.token}`;
-  //       }
-  //       return config;
-  //     },
-  //     (error) => Promise.reject(error)
-  //   );
-  // }
+  private initializeRequestInterceptor() {
+    this.instance.interceptors.request.use(
+      (config: InternalAxiosRequestConfig) => {
+        console.log("--interceptop");
+        if (this.token) {
+          console.log("--this.token", this.token);
+          config.headers["Authorization"] = `Basic ${this.token}`;
+        }
+        return config;
+      },
+      (error) => Promise.reject(error)
+    );
+  }
 
   // public initializeResponseInterceptor(
   //   onRefreshToken: () => Promise<{ token: string } | null>
@@ -43,7 +45,6 @@ export class HttpClient {
   //   this.instance.interceptors.response.use(
   //     (response) => response,
   //     async (error) => {
-  //       console.log(error.config);
   //       const config = error?.config;
 
   //       if (
@@ -67,6 +68,7 @@ export class HttpClient {
   // }
 
   public setToken(token: string) {
+    console.log("--token", token);
     this.token = token;
   }
 

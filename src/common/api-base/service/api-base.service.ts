@@ -1,7 +1,7 @@
 import { HttpClient } from "./http-client.service";
 
 export class ApiBase {
-  private _httpClient?: HttpClient;
+  protected _httpClient?: HttpClient;
 
   get httpClient(): HttpClient {
     if (!this._httpClient) {
