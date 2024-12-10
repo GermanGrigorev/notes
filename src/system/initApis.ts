@@ -7,7 +7,7 @@ import { projectApi } from "../feature/project/api/project.api";
 
 export function initApis() {
   const httpClient = new HttpClient(
-    "http://v1eq-wc6e-x259.gw-1a.dockhost.net/"
+    "https://v1eq-wc6e-x259.gw-1a.dockhost.net/"
   );
   // const httpClient = new HttpClient("http://localhost:5003");
 
