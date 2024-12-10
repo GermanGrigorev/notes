@@ -8,6 +8,7 @@ import { Button } from "@nextui-org/react";
 import { authApi, RegisterData } from "../feature/auth/api/auth.api";
 import { noteApi } from "../feature/note/api/note.api";
 import { projectApi } from "../feature/project/api/project.api";
+import { errorImg } from "../routes-help";
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -68,7 +69,7 @@ function RootComponent() {
             <div className="text-danger-600 animate-bounce text-4xl italic text-center mt-16">
               {error}
               <div className="flex justify-center h-20 mt-2">
-                <img className="" src="../logo.jpg" />
+                <img className="" src={errorImg} />
                 {/* <img className="animate-spin" src="../logo.jpg" /> */}
               </div>
             </div>
