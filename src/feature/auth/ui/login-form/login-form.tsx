@@ -25,12 +25,20 @@ export function LoginForm({
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
-      <div className="flex gap-10 items-center">
+      <div className="flex flex-col gap-5 items-center">
         <label className="">
-          <input required placeholder="Login" {...register("login")} />
+          <div className="mb-2">Login:</div>
+          <input
+            className=" border rounded-2xl p-2"
+            required
+            placeholder="Login"
+            {...register("login")}
+          />
         </label>
         <label className="">
+          <div className="mb-2">Password:</div>
           <input
+            className=" border rounded-2xl p-2"
             required
             type="password"
             placeholder="Password"

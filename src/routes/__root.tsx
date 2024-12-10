@@ -15,6 +15,7 @@ export const Route = createRootRoute({
 
 function RootComponent() {
   const [isLogin, setIsLogin] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const token = tokenLs.getValue();
@@ -24,10 +25,12 @@ function RootComponent() {
   }, []);
 
   const handleLogin = async (formData: RegisterData) => {
+    setError("");
     const [reg, regErr] = await authApi.register(formData);
     if (regErr) {
       const [login, loginErr] = await authApi.ping(formData);
       if (loginErr) {
+        setError("Account exists or wrong password");
         return;
       }
     }
@@ -59,11 +62,20 @@ function RootComponent() {
       {isLogin ? (
         <Outlet />
       ) : (
-        <div className="mb-5">
+        <div className="mt-10">
           <LoginForm onLogin={handleLogin} />
+          {error && (
+            <div className="text-danger-600 animate-bounce text-4xl italic text-center mt-16">
+              {error}
+              <div className="flex justify-center h-20 mt-2">
+                <img className="" src="../logo.jpg" />
+                {/* <img className="animate-spin" src="../logo.jpg" /> */}
+              </div>
+            </div>
+          )}
         </div>
       )}
-      <TanStackRouterDevtools position="bottom-right" />
+      {/* <TanStackRouterDevtools position="bottom-right" /> */}
     </>
   );
 }
