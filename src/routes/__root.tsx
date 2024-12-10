@@ -6,6 +6,8 @@ import { tokenLs } from "../feature/auth/state/token.ls";
 import { LoginForm } from "../feature/auth/ui/login-form/login-form";
 import { Button } from "@nextui-org/react";
 import { authApi, RegisterData } from "../feature/auth/api/auth.api";
+import { noteApi } from "../feature/note/api/note.api";
+import { projectApi } from "../feature/project/api/project.api";
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -24,7 +26,7 @@ function RootComponent() {
   const handleLogin = async (formData: RegisterData) => {
     const [reg, regErr] = await authApi.register(formData);
     if (regErr) {
-      const [login, loginErr] = await authApi.login(formData);
+      const [login, loginErr] = await authApi.ping(formData);
       if (loginErr) {
         return;
       }

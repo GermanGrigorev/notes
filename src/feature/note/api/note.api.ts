@@ -25,25 +25,23 @@ export class NoteApi extends ApiBase {
   }
 
   async create(note: OmitId<INote>): Promise<TNoteId> {
-    const res = await this.httpClient.post<{ pageId: TNoteId }>(
+    const res = await this.httpClient.post<{ page_id: TNoteId }>(
       BASE_URL + "/add_page",
       note.data,
       {
         params: {
-          owner_id: note.owner_id,
           project_id: note.project_id,
           title: note.title,
         },
       }
     );
-    return res.pageId;
+    return res.page_id;
   }
 
   async update(note: INote) {
-    return this.httpClient.post(BASE_URL + "/edit_page", note.data, {
+    return this.httpClient.put(BASE_URL + "/edit_page", note.data, {
       params: {
         id: note.id,
-        owner_id: note.owner_id,
         project_id: note.project_id,
         title: note.title,
       },

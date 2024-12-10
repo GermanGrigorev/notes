@@ -84,6 +84,22 @@ export class AuthApi extends ApiBase {
     }
   }
 
+  async ping(data: LoginData): Promise<[unknown | null, ILoginError | null]> {
+    try {
+      const basicToken = btoa(
+        unescape(encodeURIComponent(data.login + ":" + data.password))
+      );
+      this.httpClient.setToken(basicToken);
+
+      const res = await this.httpClient.get(BASE_URL + "/get_all_proj");
+
+      tokenLs.setValue({ token: basicToken });
+      return [res, null];
+    } catch (error) {
+      return [null, error as ILoginError];
+    }
+  }
+
   async register(
     data: RegisterData
   ): Promise<[unknown | null, ILoginError | null]> {

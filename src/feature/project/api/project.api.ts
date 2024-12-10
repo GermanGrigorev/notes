@@ -5,19 +5,11 @@ import { TUserId } from "../../../entity/user";
 const BASE_URL = "";
 
 export class ProjectApi extends ApiBase {
-  async getAll(user_id: TUserId): Promise<IProject[]> {
-    try {
-      const res = await this.httpClient.get<{ projects: IProject[] }>(
-        BASE_URL + "/get_all_proj",
-        {
-          params: { user_id },
-        }
-      );
-      return res.projects;
-    } catch (e: any) {
-      console.error("e++++++++rr", e.message);
-    }
-    return [];
+  async getAll(): Promise<IProject[]> {
+    const res = await this.httpClient.get<{ projects: IProject[] }>(
+      BASE_URL + "/get_all_proj"
+    );
+    return res.projects;
   }
 
   async get(proj_id: TProjectId): Promise<IProject> {
@@ -26,9 +18,9 @@ export class ProjectApi extends ApiBase {
     });
   }
 
-  async create(owner_id: TUserId, title: string) {
+  async create(title: string) {
     return this.httpClient.post(BASE_URL + "/add_proj", null, {
-      params: { owner_id, title },
+      params: { title },
     });
   }
 

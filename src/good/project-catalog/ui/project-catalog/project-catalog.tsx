@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { Accordion, AccordionItem } from "@nextui-org/accordion";
 import { TProjectId } from "../../../../entity/project";
-import { DEFAULT_USER_ID } from "../../../../entity/user";
 import {
   AddNoteForm,
   useNoteCreateMutation,
@@ -29,7 +28,6 @@ export function ProjectCatalog({ noteRoute }: { noteRoute: string }) {
   const handleAddNote = (id: TProjectId) => async () => {
     const noteId = await createNoteAsync({
       data: null,
-      owner_id: DEFAULT_USER_ID,
       project_id: id,
       title: "",
     });
